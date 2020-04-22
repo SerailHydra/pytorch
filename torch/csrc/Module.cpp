@@ -48,6 +48,8 @@
 #include <torch/csrc/api/include/torch/python/init.h>
 #include <ATen/core/EnableNamedTensor.h>
 
+#include "torch/csrc/cupti_tracer.h"
+
 #ifdef USE_CUDNN
 #include <cudnn.h>
 #endif
@@ -640,6 +642,7 @@ PyObject* initModule() {
   THPUtils_addPyMethodDefs(methods, torch::multiprocessing::python_functions());
 #ifdef USE_CUDA
   THPUtils_addPyMethodDefs(methods, THCPModule_methods());
+  THPUtils_addPyMethodDefs(methods, CUptiMethods);
 #endif
 #ifdef USE_CUDNN
   THPUtils_addPyMethodDefs(methods, THCUDNN_methods());
