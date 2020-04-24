@@ -194,9 +194,6 @@ except NameError:
 # Parameters parsed from environment
 ################################################################################
 
-print("xxxxxxxxxxxxxxxxxxxxxxxx")
-print(CUDA_HOME)
-
 VERBOSE_SCRIPT = True
 RUN_BUILD_DEPS = True
 # see if the user passed a quiet flag to setup.py arguments and respect
@@ -674,7 +671,7 @@ def configure_extension_build():
                   sources=main_sources,
                   language='c++',
                   extra_compile_args=main_compile_args + extra_compile_args,
-                  include_dirs=[os.path.join(CUDA_HOME, 'extras/CUPTI/include')],
+                  include_dirs=['/usr/local/cuda/extras/CUPTI/include'],
                   library_dirs=library_dirs,
                   extra_link_args=extra_link_args + main_link_args + [make_relative_rpath('lib')])
     extensions.append(C)
