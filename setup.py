@@ -194,6 +194,9 @@ except NameError:
 # Parameters parsed from environment
 ################################################################################
 
+print("xxxxxxxxxxxxxxxxxxxxxxxx")
+print(CUDA_HOME)
+
 VERBOSE_SCRIPT = True
 RUN_BUILD_DEPS = True
 # see if the user passed a quiet flag to setup.py arguments and respect
