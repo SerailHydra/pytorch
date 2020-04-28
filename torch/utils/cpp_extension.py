@@ -547,6 +547,9 @@ def include_paths(cuda=False):
             paths.append(cuda_home_include)
         if CUDNN_HOME is not None:
             paths.append(os.path.join(CUDNN_HOME, 'include'))
+        cupti_include = _join_cuda_home('extras/CUPTI/include')
+        if os.path.exists(cupti_include):
+            paths.append(cupti_include)
     return paths
 
 
@@ -584,6 +587,8 @@ def library_paths(cuda=False):
         paths.append(_join_cuda_home(lib_dir))
         if CUDNN_HOME is not None:
             paths.append(os.path.join(CUDNN_HOME, lib_dir))
+        if os.path.exists(_join_cuda_home('extras/CUPTI/lib64'):
+            paths.append(_join_cuda_home('extras/CUPTI/lib64'))
     return paths
 
 
