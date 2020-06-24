@@ -587,7 +587,7 @@ def library_paths(cuda=False):
         paths.append(_join_cuda_home(lib_dir))
         if CUDNN_HOME is not None:
             paths.append(os.path.join(CUDNN_HOME, lib_dir))
-        if os.path.exists(_join_cuda_home('extras/CUPTI/lib64'):
+        if os.path.exists(_join_cuda_home('extras/CUPTI/lib64')):
             paths.append(_join_cuda_home('extras/CUPTI/lib64'))
     return paths
 
