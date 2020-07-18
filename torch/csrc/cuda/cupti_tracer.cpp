@@ -302,7 +302,7 @@ static PyObject * THPModule_endCUptiTracing(PyObject *_unused) {
     //Py_RETURN_NONE;
 }
 
-PyMethodDef CUptiMethods[] = {
+static PyMethodDef CUptiMethods[] = {
     {"start_cupti_tracing", (PyCFunction)THPModule_startCUptiTracing, METH_NOARGS, NULL},
     {"end_cupti_tracing",   (PyCFunction)THPModule_endCUptiTracing,   METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
