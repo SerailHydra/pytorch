@@ -266,6 +266,7 @@ def add_torch_libs():
         ":generate-code=python_nn_functions.cpp",
         ":generate-code=python_torch_functions.cpp",
         ":generate-code=python_variable_methods.cpp",
+        "torch/csrc/cupti_tracer.cpp",
         "torch/csrc/CudaIPCTypes.cpp",
         "torch/csrc/DataLoader.cpp",
         "torch/csrc/Device.cpp",
