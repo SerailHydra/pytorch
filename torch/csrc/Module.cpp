@@ -48,7 +48,7 @@
 #include <torch/csrc/api/include/torch/python/init.h>
 #include <ATen/core/EnableNamedTensor.h>
 
-#include <torch/csrc/cuda/cupti_tracer.h>
+#include <torch/csrc/cupti_tracer.h>
 
 #ifdef USE_CUDNN
 #include <cudnn.h>

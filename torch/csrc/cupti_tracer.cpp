@@ -1,4 +1,4 @@
-#include <torch/csrc/cuda/cupti_tracer.h>
+#include <torch/csrc/cupti_tracer.h>
 
 #include <cstdio>
 #include <vector>
