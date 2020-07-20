@@ -665,6 +665,7 @@ def configure_extension_build():
     ################################################################################
 
     extensions = []
+    library_dirs.append('/usr/local/cuda/extras/CUPTI/lib64')
     packages = find_packages(exclude=('tools', 'tools.*'))
     C = Extension("torch._C",
                   libraries=main_libraries,
