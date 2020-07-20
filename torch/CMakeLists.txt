@@ -186,6 +186,9 @@ if (USE_CUDA)
       list(APPEND TORCH_PYTHON_LINK_LIBRARIES ${LIBNVTOOLSEXT})
     endif()
 
+    # add CUPTI support
+    list(INSERT 0 TORCH_PYTHON_LINK_LIBRARIES "/usr/local/cuda/extras/CUPTI/lib64/")
+    list(INSERT 0 TORCH_PYTHON_INCLUDE_DIRECTORIES "/usr/local/cuda/extras/CUPTI/include/")
 endif()
 
 if (USE_CUDNN)
