@@ -289,8 +289,8 @@ static PyObject * THPModule_endCUptiTracing(PyObject *_unused) {
     for (int i = 0; i < records.size(); ++ i) {
         auto record = records[i];
         PyObject* py_record = PyList_New(7);
-        PyList_SetItem(py_record, 0, PyString_FromString(record.kind));
-        PyList_SetItem(py_record, 1, PyString_FromString(record.name));
+        PyList_SetItem(py_record, 0, PyUnicode_FromString(record.kind));
+        PyList_SetItem(py_record, 1, PyUnicode_FromString(record.name));
         PyList_SetItem(py_record, 2, PyLong_FromUnsignedLongLong(record.start));
         PyList_SetItem(py_record, 3, PyLong_FromUnsignedLongLong(record.end));
         PyList_SetItem(py_record, 4, PyLong_FromUnsignedLong(record.processId));
