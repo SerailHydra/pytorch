@@ -96,7 +96,6 @@ class CUptiManager {
 
 
 void CUptiManager::InternalBufferRequested(uint8_t **buffer, size_t *size, size_t *maxNumRecords) {
-    printf("InternalBufferRequested\n");
     uint8_t *bfr = (uint8_t *) malloc(BUF_SIZE + ALIGN_SIZE);
     if (bfr == NULL) {
         printf("Error: out of memory\n");
@@ -135,7 +134,6 @@ void CUptiManager::Initialize(Tracer *tracer) {
 
 CUptiManager *CUptiManager::Get() {
     static auto manager = new CUptiManager();
-    printf("%p\n", manager);
     return manager;
 }
 
