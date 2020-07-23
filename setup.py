@@ -614,7 +614,7 @@ def configure_extension_build():
     CAFFE2_LIBS = []
 
     main_compile_args = []
-    main_libraries = ['shm', 'torch_python']
+    main_libraries = ['shm', 'torch_python', 'cupti']
     main_link_args = []
     main_sources = ["torch/csrc/stub.cpp"]
 
@@ -636,6 +636,7 @@ def configure_extension_build():
     if cmake_cache_vars['USE_CUDA']:
         library_dirs.append(
             os.path.dirname(cmake_cache_vars['CUDA_CUDA_LIB']))
+        library_dirs.append("/usr/local/cuda/extras/CUPTI/lib64")
 
     if build_type.is_debug():
         if IS_WINDOWS:
