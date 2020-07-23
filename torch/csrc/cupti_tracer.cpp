@@ -111,7 +111,6 @@ void CUptiManager::InternalBufferRequested(uint8_t **buffer, size_t *size, size_
 void CUptiManager::InternalBufferCompleted(CUcontext ctx, uint32_t streamId,
                                            uint8_t *buffer, size_t size, size_t validSize) {
     CUpti_Activity *record = nullptr;
-    fprintf(stderr, "InternalBufferCompleted\n");
     if (validSize > 0) {
         do {
             auto status = cuptiActivityGetNextRecord(buffer, validSize, &record);
@@ -210,6 +209,7 @@ void Tracer::APICallback(void *userdata, CUpti_CallbackDomain domain,
 }
 
 void Tracer::ActivityCallback(const CUpti_Activity &record) {
+    FILE *fp = fopen("cupti_trace.log", "a+");
     switch (record.kind) {
         case CUPTI_ACTIVITY_KIND_DRIVER: {
             auto *api = reinterpret_cast<const CUpti_ActivityAPI *>(&record);
@@ -217,7 +217,7 @@ void Tracer::ActivityCallback(const CUpti_Activity &record) {
                                (unsigned long long) (api->start),
                                (unsigned long long) (api->end),
                                api->processId, api->threadId, api->correlationId});
-            fprintf(stderr, "DRIVER cbid=%u [ %llu - %llu ] process %u, thread %u, correlation %u, duration %u\n",
+            fprintf(fp, "DRIVER cbid=%u [ %llu - %llu ] process %u, thread %u, correlation %u, duration %u\n",
                 api->cbid,
                 (unsigned long long) (api->start),
                 (unsigned long long) (api->end),
@@ -231,7 +231,7 @@ void Tracer::ActivityCallback(const CUpti_Activity &record) {
                                (unsigned long long) (api->start),
                                (unsigned long long) (api->end),
                                api->processId, api->threadId, api->correlationId});
-            fprintf(stderr, "RUNTIME cbid=%u [ %llu - %llu ] process %u, thread %u, correlation %u, duration %u\n",
+            fprintf(fp, "RUNTIME cbid=%u [ %llu - %llu ] process %u, thread %u, correlation %u, duration %u\n",
                 api->cbid,
                 (unsigned long long) (api->start),
                 (unsigned long long) (api->end),
@@ -248,7 +248,7 @@ void Tracer::ActivityCallback(const CUpti_Activity &record) {
                                (unsigned long long) (kernel->end),
                                kernel->deviceId, kernel->streamId, kernel->correlationId});
 
-            fprintf(stderr, "%s \"%s\" [ %llu - %llu ] device %u, context %u, stream %u, correlation %u, duration %u\n",
+            fprintf(fp, "%s \"%s\" [ %llu - %llu ] device %u, context %u, stream %u, correlation %u, duration %u\n",
                 kindString,
                 kernel->name,
                 (unsigned long long) (kernel->start),
@@ -256,7 +256,7 @@ void Tracer::ActivityCallback(const CUpti_Activity &record) {
                 kernel->deviceId, kernel->contextId, kernel->streamId,
                 kernel->correlationId,
                 (unsigned long long) (kernel->end - kernel->start));
-            fprintf(stderr, "    grid [%u,%u,%u], block [%u,%u,%u], shared memory (static %u, dynamic %u)\n",
+            fprintf(fp, "    grid [%u,%u,%u], block [%u,%u,%u], shared memory (static %u, dynamic %u)\n",
                 kernel->gridX, kernel->gridY, kernel->gridZ,
                 kernel->blockX, kernel->blockY, kernel->blockZ,
                 kernel->staticSharedMemory, kernel->dynamicSharedMemory);
